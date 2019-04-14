@@ -3,7 +3,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 const rules=[
     {
-        test:/\.js?/,
+        test:/\.tsx?/,
         exclude:/node_modules/,
         use:{
             loader:"babel-loader"
@@ -13,6 +13,12 @@ const rules=[
         test:/\.css?/,
         exclude:/node_modules/,
         use: ["style-loader", "css-loader"]
+      
+    },
+    {
+        test:/\.js?/,
+        exclude:/node_modules/,
+        use:"babel-loader"
       
     }
 ];
@@ -25,13 +31,13 @@ const htmlPlugin = new HtmlWebPackPlugin({
 module.exports={
     target:"web",
     mode:"development",
-    entry:"./src/index.js",
+    entry:"./src/index.tsx",
     output:{
         path:path.resolve(__dirname,'build'),
         filename:"bundle.js"
     },
     module:{rules},
-    resolve:{extensions:['.js']},
+    resolve:{extensions:['.js','.tsx','.ts']},
     devServer:{
         contentBase:'./',
         port:8080
